@@ -1,0 +1,5 @@
+/001_online/.vagrant
+/001_online/shared/var
+*.rpm
+*.whl
+*.gz

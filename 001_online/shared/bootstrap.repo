@@ -1,0 +1,6 @@
+[bootstrap]
+name=Airgapped Bootstrap Repo
+baseurl=file:///shared_packages/rpm
+enabled=1
+gpgcheck=0
+
