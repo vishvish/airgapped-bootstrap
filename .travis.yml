@@ -1,0 +1,42 @@
+---
+language: python
+services: docker
+python:
+  - "2.7"
+  # 3.5 should work once Ansible Container 0.9.2+ is released.
+  # See: https://github.com/ansible/ansible-container/issues/533
+  # - "3.5"
+
+install:
+  # Install requirements.
+  - sudo apt-get install python-apt
+  - pip install ansible
+  - pip install -r ansible-requirements.txt
+
+  # Install ansible-container.
+  - git clone https://github.com/ansible/ansible-container.git
+  - cd ansible-container
+  - pip install -e .[docker]
+  - cd ..
+  # (Source build required until 0.9.2+ is released.)
+  # - pip install ansible-container[docker]
+
+script:
+  - set -e
+
+  # Build the two images locally.
+  - cd prebuild
+  - ansible-galaxy install -r requirements.yml
+  - ansible-playbook -i 'localhost,' -c local -e ansible_python_interpreter=/usr/bin/python -e prebuild_test_mode=True prebuild.yml
+
+  # Build all the containers with Ansible Container.
+  - cd ..
+  - ansible-container --debug --var-file config.yml build
+
+  # Test the Docker Compose file.
+  - docker-compose up -d
+
+  - set +e
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
