@@ -39,4 +39,6 @@ sudo cp /shared_packages/bootstrap.repo /etc/yum.repos.d/
 # Install pip from local repo and then download all pip packages required for 
 # Ansible
 sudo yum -y install python-pip
-pip download -r /shared_packages/ansible-requirements.txt -d /shared_packages/pip
+sudo pip install pip2pi
+pip2tgz /shared_packages/pip -r /shared_packages/ansible-requirements.txt
+dir2pi /shared_packages/pip
