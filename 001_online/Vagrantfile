@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "shared", "/shared_data"
+  config.vm.synced_folder "../100_dependencies", "/shared_dependencies"
   config.vm.synced_folder "../200_packages", "/shared_packages"
 
   # Provider-specific configuration so you can fine-tune various
@@ -66,4 +67,5 @@ Vagrant.configure("2") do |config|
   # information on available options.
   
   config.vm.provision "shell", path: "script.sh"
+  config.vm.provision "shell", path: "docker.sh"
 end

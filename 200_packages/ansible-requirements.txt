@@ -9,3 +9,5 @@ paramiko
 cryptography
 setuptools
 docker
+docker-compose
+requests==2.11.1

@@ -18,6 +18,8 @@ sudo yum install \
   --downloaddir=/shared_packages/rpm \
   python-pip
 
+echo "Installing modern version of docker"
+
 # Install docker and download dependencies
 sudo yum install \
   --downloadonly \
@@ -26,8 +28,12 @@ sudo yum install \
   --downloaddir=/shared_packages/rpm \
   /shared_packages/docker/docker-17.09.0.rpm
 
+echo "Making local yum repository"
+
 # Make a Yum repository
 sudo createrepo --database /shared_packages/rpm
+
+echo "Adding local yum repo to machine configuration"
 
 # Copy repo definition
 sudo cp /shared_packages/bootstrap.repo /etc/yum.repos.d/
@@ -40,5 +46,9 @@ sudo cp /shared_packages/bootstrap.repo /etc/yum.repos.d/
 # Ansible
 sudo yum -y install python-pip
 sudo pip install pip2pi
+
+echo "Saving pip-compatible packages"
+
 pip2tgz /shared_packages/pip -r /shared_packages/ansible-requirements.txt
 dir2pi /shared_packages/pip
+
