@@ -30,7 +30,7 @@ sudo yum install \
 sudo createrepo --database /shared_packages/rpm
 
 # Copy repo definition
-sudo cp /shared_data/bootstrap.repo /etc/yum.repos.d/
+sudo cp /shared_packages/bootstrap.repo /etc/yum.repos.d/
 
 ####
 # This should now work without network
@@ -39,4 +39,4 @@ sudo cp /shared_data/bootstrap.repo /etc/yum.repos.d/
 # Install pip from local repo and then download all pip packages required for 
 # Ansible
 sudo yum -y install python-pip
-pip download -r /shared_data/ansible-requirements.txt -d /shared_packages/pip
+pip download -r /shared_packages/ansible-requirements.txt -d /shared_packages/pip

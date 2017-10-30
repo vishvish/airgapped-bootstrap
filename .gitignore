@@ -3,3 +3,5 @@
 *.rpm
 *.whl
 *.gz
+/200_packages/rpm/repodata
+/002_offline/.vagrant
